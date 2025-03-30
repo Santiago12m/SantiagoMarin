@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Document</title>
+    <style>
+        .navegacion{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000000;
+        }
+        ul, li{
+            display: inline;
+            margin: 10px;
+            justify-content: center;
+        }
+        section, td, th{
+            border: solid 1px;
+        }
+        table,td,th{
+            border-collapse: collapse;
+            margin: 10px;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        i{
+            color: white;
+            margin: 5px;
+        }
+        .modal1 {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 1;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Fondo oscuro */
+  
+}
+.modal-contenido-tabla{
+    justify-content: center;
+    width: 50%;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    background-color: white;
+}
+.cerrar {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#inputId, #inputNombre,#inputCorreo, #inputTelefono{
+    width: 100%;
+    margin: 10px auto;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navegacion">
+            <a href="">Logo</a>
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="">Servicio</a></li>
+                <li><a href="">Contacto</a></li>
+            </ul>
+            <div>
+                <i class="fa-solid fa-search"></i><input type="text" id="Busqueda" placeholder="Buscar">
+            <button id="btnBuscar">Buscar</button>
+            </div>
+            
+        </nav>
+        <section>
+            <h1>Lista de clientes</h1>
+            <table>
+                    <th>id cliente</th>
+                    <th>nombre</th>
+                    <th>correo</th>
+                    <th>telefono</th>
+                    <th>acciones</th>
+                <tr>
+                    <td>1</td>
+                    <td>Samuel</td>
+                    <td>sami@gmail.com</td>
+                    <td>3123458796</td>
+                    <td><button id="btnVer">Ver</button>
+                        <button id="btnEditar">Editar</button>
+                        <button id="btnEliminar">Eliminar</button>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Valentina</td>
+                    <td>vale12@gmail.com</td>
+                    <td>3146002341</td>
+                    <td>
+                        <button id="btnVer2">Ver</button>
+                        <button id="btnEditar2">Editar</button>
+                        <button id="btnEliminar2">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Pedro</td>
+                    <td>elpedrito@gmail.com</td>
+                    <td>3119645673</td>
+                    <td>
+                        <button id="btnVer3">Ver</button>
+                        <button id="btnEditar3">Editar</button>
+                        <button id="btnEliminar3">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </section>
+            <div id="modalVer" class="modal1">
+                <div class="modal-contenido-tabla">
+                <span class="cerrar">&times;</span>
+                <form>
+                    <label for="idCliente">Id Cliente</label>
+                    <input type="number" id="inputId" value="1" disabled><br>
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" id="inputNombre" value="Samuel" disabled><br>
+                    <label for="Correo">Correo</label>
+                    <input type="email" id="inputCorreo" value="sami@gmail.com" disabled><br>
+                    <label for="telefono">Telefono</label>
+                    <input type="tel" id="inputTelefono" value="3123458796" disabled>
+                    <button>Salir</button>
+                </form>
+            </div>
+        </div>
+        <div id="modalEditar" class="modal1">
+            <div class="modal-contenido-tabla">
+                <span class="cerrar">&times;</span>
+                <form>
+                    <label for="idCliente">Id Cliente</label>
+                    <input type="number" id="inputId" placeholder="1" ><br>
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" id="inputNombre" placeholder="Samuel" ><br>
+                    <label for="Correo">Correo</label>
+                    <input type="email" id="inputCorreo" placeholder="sami@gmail.com"><br>
+                    <label for="telefono">Telefono</label>
+                    <input type="tel" id="inputTelefono" placeholder="3123458796">
+                    <input type="reset" value="Limpiar">
+                    <input type="submit" value="Guardar">
+                </form>
+            </div>
+        </div>
+        <script>
+            let modalTabla = document.getElementById("modalVer");
+            let modalEditar = document.getElementById("modalEditar");
+
+            let btnVer = document.getElementById("btnVer");
+            let btnEditar = document.getElementById("btnEditar");
+
+            let cerrar = document.getElementsByClassName("cerrar")[0];
+            let cerrar2 = document.getElementsByClassName("cerrar")[1];
+
+            btnVer.onclick = function () {
+                modalTabla.style.display = "block";
+            }
+            btnEditar.onclick = function() {
+                modalEditar.style.display = "block";
+            }
+
+
+            cerrar.onclick = function () {
+                modalTabla.style.display = "none";
+            }
+            cerrar2.onclick = function(){
+                modalEditar.style.display = "none";
+            }
+
+            window.onclick = function(event){
+                if (event.target == modalTabla) {
+                modalTabla.style.display = "none";
+            }
+                if (event.target == modalEditar) {
+                    modalEditar.style.display = "none";
+                }
+            }
+            
+        </script>
+</body>
+</html>
